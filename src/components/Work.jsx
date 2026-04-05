@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import agileabilityImg from '../assets/agileability.png'
 
-const projects = [
+const liveProjects = [
   {
     id: '01',
     title: 'AgileAbility',
@@ -16,6 +16,19 @@ const projects = [
   },
   {
     id: '02',
+    title: 'GBA5',
+    category: 'Design & Development',
+    year: '2025',
+    tags: ['React', 'Tailwind', 'Sports'],
+    accent: [16, 185, 129],
+    desc: 'Modern sports platform for the GBA5 basketball association — schedules, standings, and team pages.',
+    href: 'https://gba5.team',
+  },
+]
+
+const inProgressProjects = [
+  {
+    id: '03',
     title: 'Coming Soon',
     category: 'Next Project',
     year: '2025',
@@ -192,8 +205,20 @@ export default function Work() {
           </motion.a>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 lg:gap-5">
-          {projects.map((p, i) => <Card key={p.id} project={p} index={i} />)}
+        {/* Live Work */}
+        <div className="mb-16">
+          <p className="text-[10px] tracking-[0.25em] uppercase mb-6" style={{ color: 'rgba(13,15,26,0.35)' }}>Live</p>
+          <div className="grid sm:grid-cols-2 gap-4 lg:gap-5">
+            {liveProjects.map((p, i) => <Card key={p.id} project={p} index={i} />)}
+          </div>
+        </div>
+
+        {/* In Progress */}
+        <div>
+          <p className="text-[10px] tracking-[0.25em] uppercase mb-6" style={{ color: 'rgba(13,15,26,0.35)' }}>In Progress</p>
+          <div className="grid sm:grid-cols-2 gap-4 lg:gap-5">
+            {inProgressProjects.map((p, i) => <Card key={p.id} project={p} index={i} />)}
+          </div>
         </div>
       </div>
     </section>
