@@ -209,7 +209,7 @@ export default function Work() {
 
         {/* Live Work */}
         <div className="mb-16">
-          <p className="text-[10px] tracking-[0.25em] uppercase mb-6" style={{ color: 'rgba(13,15,26,0.35)' }}>Live</p>
+          <p className="text-[10px] tracking-[0.25em] uppercase mb-6" style={{ color: 'rgba(13,15,26,0.35)' }}>2 Live Products</p>
           <div className="grid sm:grid-cols-2 gap-4 lg:gap-5">
             {liveProjects.map((p, i) => <Card key={p.id} project={p} index={i} />)}
           </div>
