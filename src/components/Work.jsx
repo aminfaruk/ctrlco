@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import agileabilityImg from '../assets/agileability.png'
+import gba5Img from '../assets/gba5.png'
 
 const liveProjects = [
   {
@@ -23,6 +24,7 @@ const liveProjects = [
     accent: [16, 185, 129],
     desc: 'Modern sports platform for the GBA5 basketball association. Schedules, standings, and team pages.',
     href: 'https://gba5.team',
+    image: gba5Img,
   },
 ]
 
