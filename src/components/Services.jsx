@@ -6,7 +6,7 @@ const services = [
   {
     num: '01',
     title: 'Website Design',
-    line: 'Interfaces crafted with precision — every detail shaped to communicate and convert.',
+    line: 'Interfaces crafted with precision. Every detail shaped to communicate and convert.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.3">
         <rect x="1.5" y="2.5" width="15" height="11" rx="1.8"/>
@@ -18,7 +18,7 @@ const services = [
   {
     num: '02',
     title: 'Website Development',
-    line: 'Clean, scalable code on modern frameworks — engineered to perform under pressure.',
+    line: 'Clean, scalable code on modern frameworks. Engineered to perform under pressure.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.3">
         <path d="M6 4.5L2 9l4 4.5M12 4.5l4 4.5-4 4.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -29,7 +29,7 @@ const services = [
   {
     num: '03',
     title: 'Performance Optimisation',
-    line: 'Audited, optimised, rebuilt — hitting elite Core Web Vitals because speed is revenue.',
+    line: 'Audited, optimised, rebuilt. Hitting elite Core Web Vitals because speed is revenue.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.3">
         <path d="M9 1.5C5 1.5 1.5 5 1.5 9s3.5 7.5 7.5 7.5 7.5-3.5 7.5-7.5" strokeLinecap="round"/>
@@ -41,7 +41,7 @@ const services = [
   {
     num: '04',
     title: 'Maintenance & Support',
-    line: 'Ongoing updates, security patches, and expert support — your site, kept sharp.',
+    line: 'Ongoing updates, security patches, and expert support. Your site, kept sharp.',
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.3">
         <path d="M9 2a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 9 2z" strokeOpacity="0.4"/>
@@ -168,7 +168,7 @@ export default function Services() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-base leading-relaxed lg:max-w-xs lg:ml-auto" style={{ color: 'rgba(13,15,26,0.58)' }}
           >
-            From first wireframe to final deploy — we handle the full stack.
+            From first wireframe to final deploy. We handle the full stack.
           </motion.p>
         </div>
 

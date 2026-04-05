@@ -21,7 +21,7 @@ const liveProjects = [
     year: '2025',
     tags: ['React', 'Tailwind', 'Sports'],
     accent: [16, 185, 129],
-    desc: 'Modern sports platform for the GBA5 basketball association — schedules, standings, and team pages.',
+    desc: 'Modern sports platform for the GBA5 basketball association. Schedules, standings, and team pages.',
     href: 'https://gba5.team',
   },
 ]

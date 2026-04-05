@@ -71,7 +71,7 @@ export default function Contact() {
             transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="text-lg leading-relaxed mb-14 max-w-sm" style={{ color: 'rgba(13,15,26,0.65)' }}>
-              Have a project in mind? Send us a message — we reply within 24 hours.
+              Have a project in mind? Send us a message. We reply within 24 hours.
             </p>
 
             <div className="flex flex-col gap-5">

@@ -315,25 +315,6 @@ export default function Hero() {
         className="relative z-10 flex flex-col items-center text-center px-6 pt-16"
       >
 
-        {/* Eyebrow label */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.32, 0.72, 0, 1] }}
-          className="flex items-center gap-2.5 mb-14"
-        >
-          <span
-            className="px-3 py-1 rounded-full text-[9px] tracking-[0.28em] uppercase font-semibold"
-            style={{
-              background: 'rgba(79,70,229,0.07)',
-              border: '1px solid rgba(79,70,229,0.18)',
-              color: 'rgba(79,70,229,0.75)',
-            }}
-          >
-            Web Development Studio
-          </span>
-        </motion.div>
-
         {/* ── THE LOGO — product reveal entrance ─────────── */}
         <motion.div
           initial={{ opacity: 0, scale: 0.72, y: 24 }}
@@ -404,30 +385,6 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* ── Scroll indicator ──────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.8 }}
-        className="absolute bottom-9 left-1/2 -translate-x-1/2 pointer-events-none"
-      >
-        <motion.div
-          animate={{ y: [0, 7, 0] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-1.5"
-        >
-          <span
-            className="text-[8px] tracking-[0.3em] uppercase"
-            style={{ color: 'rgba(13,15,26,0.22)' }}
-          >
-            Scroll
-          </span>
-          <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
-            <rect x="4.5" y="3.5" width="3" height="4.5" rx="1.5" fill="rgba(13,15,26,0.3)" />
-            <rect x="0.75" y="0.75" width="10.5" height="18.5" rx="5.25" stroke="rgba(13,15,26,0.15)" strokeWidth="1.2"/>
-          </svg>
-        </motion.div>
-      </motion.div>
     </section>
   )
 }
