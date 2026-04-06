@@ -34,6 +34,7 @@
     scroll-behavior: smooth;
     background-color: var(--surface);
     color: var(--on-surface);
+    overflow-x: hidden;
   }
 
   body {

@@ -9,7 +9,7 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div className="relative min-h-screen" style={{ background: 'var(--surface)' }}>
+    <div className="relative min-h-screen overflow-x-hidden" style={{ background: 'var(--surface)' }}>
       <Navbar />
       <Hero />
       <About />
