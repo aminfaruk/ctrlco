@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
 
 const services = [
   'Website Design',
@@ -99,8 +98,6 @@ function StyledTextarea(props) {
 }
 
 export default function Contact() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
   const [done, setDone] = useState(false)
   const [form, setForm] = useState({
     name: '',
@@ -112,8 +109,8 @@ export default function Contact() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
 
   return (
-    <section id="contact" ref={ref} className="relative py-44 px-6">
-      {/* Surface — back to base */}
+    <section id="contact" className="relative py-44 px-6">
+      {/* Surface */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: 'var(--surface)' }}
@@ -131,12 +128,7 @@ export default function Contact() {
 
       <div className="relative max-w-[1360px] mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
+        <div className="mb-20">
           <p
             className="text-label mb-5"
             style={{ color: 'var(--primary)', opacity: 0.5 }}
@@ -151,19 +143,11 @@ export default function Contact() {
             <br />
             something great.
           </h2>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-20 items-start">
           {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.9,
-              delay: 0.1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
+          <div>
             <p
               className="font-body text-lg leading-relaxed mb-14 max-w-sm"
               style={{ color: 'var(--on-surface-mid)' }}
@@ -237,154 +221,127 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Right — form */}
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.9,
-              delay: 0.18,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            <AnimatePresence mode="wait">
-              {done ? (
-                <motion.div
-                  key="ok"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="rounded-lg p-10 flex flex-col items-center text-center gap-5 min-h-[360px] justify-center"
-                  style={{ background: 'var(--surface-container)' }}
-                >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{
-                      type: 'spring',
-                      stiffness: 220,
-                      damping: 16,
-                      delay: 0.15,
-                    }}
-                    className="w-14 h-14 rounded-lg flex items-center justify-center"
-                    style={{
-                      background: 'rgba(129, 236, 255, 0.1)',
-                      border: '1px solid rgba(129, 236, 255, 0.25)',
-                    }}
-                  >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="var(--primary)"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    >
-                      <path d="M4 10.5l4 4 8-8" />
-                    </svg>
-                  </motion.div>
-                  <h3
-                    className="font-display font-semibold text-lg tracking-tight"
-                    style={{ color: 'var(--on-surface)' }}
-                  >
-                    Message sent.
-                  </h3>
-                  <p
-                    className="font-body text-sm leading-relaxed max-w-[220px]"
-                    style={{ color: 'var(--on-surface-mid)' }}
-                  >
-                    We'll be in touch within 24 hours.
-                  </p>
-                  <motion.button
-                    onClick={() => {
-                      setDone(false)
-                      setForm({ name: '', email: '', service: '', message: '' })
-                    }}
-                    className="btn-ghost text-label-md px-5 py-2 rounded mt-1"
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    Send another
-                  </motion.button>
-                </motion.div>
-              ) : (
-                <motion.form
-                  key="form"
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    setDone(true)
+          <div>
+            {done ? (
+              <div
+                className="rounded-lg p-10 flex flex-col items-center text-center gap-5 min-h-[360px] justify-center"
+                style={{ background: 'var(--surface-container)' }}
+              >
+                <div
+                  className="w-14 h-14 rounded-lg flex items-center justify-center"
+                  style={{
+                    background: 'rgba(129, 236, 255, 0.1)',
+                    border: '1px solid rgba(129, 236, 255, 0.25)',
                   }}
-                  className="rounded-lg p-8 flex flex-col gap-5"
-                  style={{ background: 'var(--surface-container)' }}
                 >
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <Field label="Name">
-                      <StyledInput
-                        name="name"
-                        placeholder="Your name"
-                        value={form.name}
-                        onChange={set}
-                        required
-                      />
-                    </Field>
-                    <Field label="Email">
-                      <StyledInput
-                        type="email"
-                        name="email"
-                        placeholder="your@email.com"
-                        value={form.email}
-                        onChange={set}
-                        required
-                      />
-                    </Field>
-                  </div>
-
-                  <Field label="Service">
-                    <StyledSelect
-                      name="service"
-                      value={form.service}
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="var(--primary)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  >
+                    <path d="M4 10.5l4 4 8-8" />
+                  </svg>
+                </div>
+                <h3
+                  className="font-display font-semibold text-lg tracking-tight"
+                  style={{ color: 'var(--on-surface)' }}
+                >
+                  Message sent.
+                </h3>
+                <p
+                  className="font-body text-sm leading-relaxed max-w-[220px]"
+                  style={{ color: 'var(--on-surface-mid)' }}
+                >
+                  We'll be in touch within 24 hours.
+                </p>
+                <button
+                  onClick={() => {
+                    setDone(false)
+                    setForm({ name: '', email: '', service: '', message: '' })
+                  }}
+                  className="btn-ghost text-label-md px-5 py-2 rounded mt-1"
+                >
+                  Send another
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  setDone(true)
+                }}
+                className="rounded-lg p-8 flex flex-col gap-5"
+                style={{ background: 'var(--surface-container)' }}
+              >
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <Field label="Name">
+                    <StyledInput
+                      name="name"
+                      placeholder="Your name"
+                      value={form.name}
                       onChange={set}
-                    >
-                      <option value="" style={{ background: '#1a191b' }}>
-                        Select a service...
-                      </option>
-                      {services.map((s) => (
-                        <option
-                          key={s}
-                          value={s}
-                          style={{ background: '#1a191b' }}
-                        >
-                          {s}
-                        </option>
-                      ))}
-                    </StyledSelect>
-                  </Field>
-
-                  <Field label="Message">
-                    <StyledTextarea
-                      name="message"
-                      placeholder="Tell us about your project..."
-                      value={form.message}
-                      onChange={set}
-                      rows={5}
+                      required
                     />
                   </Field>
+                  <Field label="Email">
+                    <StyledInput
+                      type="email"
+                      name="email"
+                      placeholder="your@email.com"
+                      value={form.email}
+                      onChange={set}
+                      required
+                    />
+                  </Field>
+                </div>
 
-                  <motion.button
-                    type="submit"
-                    className="btn-primary w-full py-3.5 rounded text-label-md mt-1"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
+                <Field label="Service">
+                  <StyledSelect
+                    name="service"
+                    value={form.service}
+                    onChange={set}
                   >
-                    Send Message
-                  </motion.button>
-                </motion.form>
-              )}
-            </AnimatePresence>
-          </motion.div>
+                    <option value="" style={{ background: '#1a191b' }}>
+                      Select a service...
+                    </option>
+                    {services.map((s) => (
+                      <option
+                        key={s}
+                        value={s}
+                        style={{ background: '#1a191b' }}
+                      >
+                        {s}
+                      </option>
+                    ))}
+                  </StyledSelect>
+                </Field>
+
+                <Field label="Message">
+                  <StyledTextarea
+                    name="message"
+                    placeholder="Tell us about your project..."
+                    value={form.message}
+                    onChange={set}
+                    rows={5}
+                  />
+                </Field>
+
+                <button
+                  type="submit"
+                  className="btn-primary w-full py-3.5 rounded text-label-md mt-1"
+                >
+                  Send Message
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </section>

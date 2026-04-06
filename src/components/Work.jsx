@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import agileabilityImg from '../assets/agileability.png'
 import gba5Img from '../assets/gba5.png'
 
@@ -43,60 +41,23 @@ const inProgressProjects = [
 ]
 
 /* ─────────────────────────────────────────────────────────────
-   PARALLAX IMAGE — slow scroll offset on screenshots
+   PROJECT CARD
 ───────────────────────────────────────────────────────────── */
-function ParallaxImage({ src, alt }) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-  const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
-
-  return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden">
-      <motion.img
-        src={src}
-        alt={alt}
-        className="absolute inset-0 w-full h-[130%] object-cover object-top transition-transform duration-700 group-hover:scale-[1.08]"
-        style={{ y, top: '-15%' }}
-      />
-    </div>
-  )
-}
-
-/* ─────────────────────────────────────────────────────────────
-   PROJECT CARD — with hover overlay reveal
-───────────────────────────────────────────────────────────── */
-function Card({ project, index, tall = false }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
+function Card({ project }) {
   const [r, g, b] = project.accent
-  const Tag = project.href ? motion.a : motion.div
+  const Tag = project.href ? 'a' : 'div'
   const linkProps = project.href
     ? { href: project.href, target: '_blank', rel: 'noopener noreferrer' }
     : {}
 
-  const imageHeight = 'h-[220px]'
-
   return (
     <Tag
       {...linkProps}
-      ref={ref}
-      initial={{ opacity: 0, y: 44 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.9,
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className="group relative rounded-lg overflow-hidden cursor-pointer block"
+      className="group relative rounded-lg overflow-hidden cursor-pointer block transition-transform duration-300 hover:-translate-y-1"
       style={{
         background: 'var(--surface-container)',
         textDecoration: 'none',
       }}
-      whileHover={{ y: -6 }}
-      whileTap={{ scale: 0.99 }}
     >
       {/* Top accent gradient */}
       <div
@@ -107,7 +68,7 @@ function Card({ project, index, tall = false }) {
       />
 
       {/* Visual area */}
-      <div className={`relative ${imageHeight} flex items-center justify-center overflow-hidden`}>
+      <div className="relative h-[220px] flex items-center justify-center overflow-hidden">
         {project.image ? (
           <>
             {/* Ambient background glow */}
@@ -145,7 +106,7 @@ function Card({ project, index, tall = false }) {
                 />
               </div>
             ) : (
-              <motion.img
+              <img
                 src={project.image}
                 alt={project.title}
                 className="relative z-[1] w-36 h-36 sm:w-44 sm:h-44 object-contain rounded-xl transition-transform duration-500 group-hover:scale-110"
@@ -155,13 +116,13 @@ function Card({ project, index, tall = false }) {
               />
             )}
 
-            {/* Hover reveal overlay — "View Project" */}
+            {/* Hover reveal overlay */}
             <div className="absolute inset-0 z-[2] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
               <div
                 className="absolute inset-0"
                 style={{ background: 'rgba(14,14,15,0.5)' }}
               />
-              <motion.div
+              <div
                 className="relative flex items-center gap-2.5 px-5 py-2.5 rounded"
                 style={{
                   background: `rgba(${r},${g},${b},0.12)`,
@@ -185,7 +146,7 @@ function Card({ project, index, tall = false }) {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </motion.div>
+              </div>
             </div>
           </>
         ) : (
@@ -228,7 +189,7 @@ function Card({ project, index, tall = false }) {
         )}
       </div>
 
-      {/* Meta — tonal shift */}
+      {/* Meta */}
       <div className="p-6" style={{ background: 'var(--surface-low)' }}>
         <div className="flex items-start justify-between gap-3 mb-2">
           <div>
@@ -284,11 +245,8 @@ function Card({ project, index, tall = false }) {
    WORK SECTION
 ───────────────────────────────────────────────────────────── */
 export default function Work() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
   return (
-    <section id="work" ref={ref} className="relative py-44 px-6">
+    <section id="work" className="relative py-44 px-6">
       {/* Tonal transition */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -296,13 +254,10 @@ export default function Work() {
       />
 
       <div className="relative max-w-[1360px] mx-auto">
-        {/* Header — with decorative background number */}
+        {/* Header */}
         <div className="relative flex flex-col sm:flex-row sm:items-end justify-between gap-8 mb-20">
-          {/* Large faint background number — fills dead space left of heading */}
-          <motion.span
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          {/* Large faint background number */}
+          <span
             className="absolute -left-4 -top-16 font-display font-bold pointer-events-none select-none hidden lg:block"
             style={{
               fontSize: 'clamp(10rem, 18vw, 16rem)',
@@ -314,14 +269,9 @@ export default function Work() {
             aria-hidden="true"
           >
             W.
-          </motion.span>
+          </span>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
+          <div className="relative">
             <p
               className="text-label mb-5"
               style={{ color: 'var(--primary)', opacity: 0.5 }}
@@ -336,15 +286,12 @@ export default function Work() {
               <br />
               work.
             </h2>
-          </motion.div>
+          </div>
 
-          {/* CTA — prominent glowing electric button with pulse */}
-          <motion.a
+          {/* CTA */}
+          <a
             href="#contact"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="relative font-display font-semibold text-xs tracking-widest uppercase px-8 py-4 rounded w-fit shrink-0 mb-1 inline-flex items-center gap-3 cursor-pointer"
+            className="relative font-display font-semibold text-xs tracking-widest uppercase px-8 py-4 rounded w-fit shrink-0 mb-1 inline-flex items-center gap-3 cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(129,236,255,0.15),0_0_60px_rgba(214,116,255,0.08)]"
             style={{
               color: 'var(--primary)',
               background: 'transparent',
@@ -355,33 +302,7 @@ export default function Work() {
               backgroundClip: 'padding-box, border-box',
               textDecoration: 'none',
             }}
-            whileHover={{
-              scale: 1.04,
-              boxShadow:
-                '0 0 30px rgba(129,236,255,0.15), 0 0 60px rgba(214,116,255,0.08)',
-            }}
-            whileTap={{ scale: 0.97 }}
           >
-            {/* Pulse ring behind button */}
-            <motion.span
-              className="absolute inset-0 rounded pointer-events-none"
-              style={{
-                border: '1px solid transparent',
-                backgroundImage:
-                  'linear-gradient(transparent, transparent), linear-gradient(45deg, var(--primary), var(--secondary))',
-                backgroundOrigin: 'border-box',
-                backgroundClip: 'padding-box, border-box',
-              }}
-              animate={{
-                opacity: [0.6, 0, 0.6],
-                scale: [1, 1.08, 1],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
             Start a project
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path
@@ -392,16 +313,11 @@ export default function Work() {
                 strokeLinejoin="round"
               />
             </svg>
-          </motion.a>
+          </a>
         </div>
 
         {/* Featured label */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mb-8 flex items-center gap-3"
-        >
+        <div className="mb-8 flex items-center gap-3">
           <span
             className="inline-flex items-center gap-2 text-label px-3 py-1.5 rounded"
             style={{
@@ -420,21 +336,16 @@ export default function Work() {
             className="h-px flex-1"
             style={{ background: 'rgba(129,236,255,0.06)' }}
           />
-        </motion.div>
+        </div>
 
         {/* Project grid */}
         <div className="grid sm:grid-cols-2 gap-5 mb-16">
-          <Card project={liveProjects[0]} index={0} />
-          <Card project={liveProjects[1]} index={1} />
+          <Card project={liveProjects[0]} />
+          <Card project={liveProjects[1]} />
         </div>
 
         {/* In Progress */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="mb-8 flex items-center gap-3"
-        >
+        <div className="mb-8 flex items-center gap-3">
           <span
             className="inline-flex items-center gap-2 text-label px-3 py-1.5 rounded"
             style={{
@@ -443,11 +354,9 @@ export default function Work() {
               color: 'var(--secondary)',
             }}
           >
-            <motion.span
+            <span
               className="w-1.5 h-1.5 rounded-full"
               style={{ background: 'var(--secondary)' }}
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             />
             In Progress
           </span>
@@ -455,11 +364,11 @@ export default function Work() {
             className="h-px flex-1"
             style={{ background: 'rgba(214,116,255,0.06)' }}
           />
-        </motion.div>
+        </div>
 
         <div className="grid sm:grid-cols-2 gap-5">
-          {inProgressProjects.map((p, i) => (
-            <Card key={p.id} project={p} index={i} />
+          {inProgressProjects.map((p) => (
+            <Card key={p.id} project={p} />
           ))}
         </div>
       </div>

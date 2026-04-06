@@ -1,12 +1,9 @@
-import { motion } from 'framer-motion'
-
 export default function Footer() {
   return (
     <footer
       className="relative py-10 px-6"
       style={{ background: 'var(--surface-low)' }}
     >
-      {/* Tonal top edge — no border, just surface shift */}
       <div className="max-w-[1360px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
         <div className="flex items-center gap-2.5">
           <img
@@ -31,7 +28,7 @@ export default function Footer() {
 
         <div className="flex gap-6">
           {['Privacy', 'Terms'].map((t) => (
-            <motion.a
+            <a
               key={t}
               href="#"
               className="text-label transition-colors duration-300"
@@ -40,10 +37,9 @@ export default function Footer() {
               onMouseLeave={(e) =>
                 (e.target.style.color = 'var(--on-surface-dim)')
               }
-              whileHover={{ y: -1 }}
             >
               {t}
-            </motion.a>
+            </a>
           ))}
         </div>
       </div>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -20,12 +19,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: [0.32, 0.72, 0, 1] }}
-        className="fixed top-5 inset-x-0 z-40 flex justify-center px-4 pointer-events-none"
-      >
+      <nav className="fixed top-5 inset-x-0 z-40 flex justify-center px-4 pointer-events-none">
         <div
           className="pointer-events-auto flex items-center gap-1 px-2 py-2 rounded-lg"
           style={{
@@ -110,77 +104,60 @@ export default function Navbar() {
             onClick={() => setOpen(!open)}
             aria-label="Menu"
           >
-            <motion.span
-              animate={{ rotate: open ? 45 : 0, y: open ? 0 : -3 }}
-              className="absolute block w-3.5 h-px origin-center"
-              style={{ background: 'var(--on-surface-mid)' }}
-              transition={{ duration: 0.25 }}
+            <span
+              className="absolute block w-3.5 h-px origin-center transition-transform duration-200"
+              style={{
+                background: 'var(--on-surface-mid)',
+                transform: open ? 'rotate(45deg)' : 'translateY(-3px)',
+              }}
             />
-            <motion.span
-              animate={{ rotate: open ? -45 : 0, y: open ? 0 : 3 }}
-              className="absolute block w-3.5 h-px origin-center"
-              style={{ background: 'var(--on-surface-mid)' }}
-              transition={{ duration: 0.25 }}
+            <span
+              className="absolute block w-3.5 h-px origin-center transition-transform duration-200"
+              style={{
+                background: 'var(--on-surface-mid)',
+                transform: open ? 'rotate(-45deg)' : 'translateY(3px)',
+              }}
             />
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile overlay */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-30 flex flex-col items-center justify-center"
-            style={{
-              backdropFilter: 'blur(40px)',
-              WebkitBackdropFilter: 'blur(40px)',
-              background: 'rgba(14, 14, 15, 0.95)',
-            }}
-          >
-            <div className="flex flex-col items-center gap-8">
-              {links.map((l, i) => (
-                <motion.a
-                  key={l.href}
-                  href={l.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 12 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: i * 0.07,
-                    ease: [0.32, 0.72, 0, 1],
-                  }}
-                  className="font-display text-3xl font-semibold tracking-tight transition-colors duration-300"
-                  style={{ color: 'var(--on-surface-dim)' }}
-                  onMouseEnter={(e) => (e.target.style.color = 'var(--primary)')}
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = 'var(--on-surface-dim)')
-                  }
-                  onClick={() => setOpen(false)}
-                >
-                  {l.label}
-                </motion.a>
-              ))}
-              <motion.a
-                href="#contact"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, delay: links.length * 0.07 }}
-                className="btn-primary text-label-md px-8 py-3.5 rounded mt-4"
+      {open && (
+        <div
+          className="fixed inset-0 z-30 flex flex-col items-center justify-center"
+          style={{
+            backdropFilter: 'blur(40px)',
+            WebkitBackdropFilter: 'blur(40px)',
+            background: 'rgba(14, 14, 15, 0.95)',
+          }}
+        >
+          <div className="flex flex-col items-center gap-8">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="font-display text-3xl font-semibold tracking-tight transition-colors duration-300"
+                style={{ color: 'var(--on-surface-dim)' }}
+                onMouseEnter={(e) => (e.target.style.color = 'var(--primary)')}
+                onMouseLeave={(e) =>
+                  (e.target.style.color = 'var(--on-surface-dim)')
+                }
                 onClick={() => setOpen(false)}
               >
-                Start a project
-              </motion.a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {l.label}
+              </a>
+            ))}
+            <a
+              href="#contact"
+              className="btn-primary text-label-md px-8 py-3.5 rounded mt-4"
+              onClick={() => setOpen(false)}
+            >
+              Start a project
+            </a>
+          </div>
+        </div>
+      )}
     </>
   )
 }

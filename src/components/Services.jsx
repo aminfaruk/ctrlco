@@ -1,6 +1,3 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-
 const services = [
   {
     num: '01',
@@ -56,21 +53,11 @@ const services = [
 ]
 
 function ServiceRow({ service, index, total }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
   const isLast = index === total - 1
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 22 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <motion.div
-        className="group grid grid-cols-[28px_1fr] lg:grid-cols-[28px_1fr_auto] gap-x-6 lg:gap-x-10 gap-y-2 py-9 cursor-default"
-        whileHover="hovered"
-      >
+    <div>
+      <div className="group grid grid-cols-[28px_1fr] lg:grid-cols-[28px_1fr_auto] gap-x-6 lg:gap-x-10 gap-y-2 py-9 cursor-default">
         {/* Number */}
         <span
           className="text-label pt-0.5"
@@ -81,21 +68,18 @@ function ServiceRow({ service, index, total }) {
 
         {/* Title + description */}
         <div className="flex flex-col gap-2">
-          {/* Status terminal prefix */}
           <span
             className="text-label"
             style={{ color: 'var(--primary)', fontSize: '0.5625rem' }}
           >
             {service.prefix}
           </span>
-          <motion.h3
-            variants={{ hovered: { x: 4 } }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="font-display font-semibold tracking-tight text-xl transition-colors duration-300"
+          <h3
+            className="font-display font-semibold tracking-tight text-xl"
             style={{ color: 'var(--on-surface)' }}
           >
             {service.title}
-          </motion.h3>
+          </h3>
           <p
             className="font-body text-sm leading-relaxed max-w-xl"
             style={{ color: 'var(--on-surface-mid)' }}
@@ -105,9 +89,7 @@ function ServiceRow({ service, index, total }) {
         </div>
 
         {/* Icon — desktop right */}
-        <motion.div
-          variants={{ hovered: { scale: 1.1, rotate: 5 } }}
-          transition={{ duration: 0.3 }}
+        <div
           className="hidden lg:flex w-9 h-9 rounded items-center justify-center self-center"
           style={{
             background: 'rgba(129, 236, 255, 0.06)',
@@ -116,10 +98,10 @@ function ServiceRow({ service, index, total }) {
           }}
         >
           {service.icon}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
-      {/* Tonal divider — no lines, gradient fade */}
+      {/* Tonal divider */}
       {!isLast && (
         <div
           className="h-px"
@@ -129,17 +111,14 @@ function ServiceRow({ service, index, total }) {
           }}
         />
       )}
-    </motion.div>
+    </div>
   )
 }
 
 export default function Services() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
   return (
-    <section id="services" ref={ref} className="relative py-44 px-6">
-      {/* Surface — back to base */}
+    <section id="services" className="relative py-44 px-6">
+      {/* Surface */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: 'var(--surface)' }}
@@ -156,13 +135,9 @@ export default function Services() {
       />
 
       <div className="relative max-w-[1360px] mx-auto">
-        {/* Header — asymmetric */}
+        {/* Header */}
         <div className="grid lg:grid-cols-2 gap-10 items-end mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
+          <div>
             <p
               className="text-label mb-5"
               style={{ color: 'var(--primary)', opacity: 0.5 }}
@@ -174,20 +149,17 @@ export default function Services() {
               <br />
               site needs to win.
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
+          <p
             className="font-body text-base leading-relaxed lg:max-w-xs lg:ml-auto"
             style={{ color: 'var(--on-surface-dim)' }}
           >
             From first wireframe to final deploy. We handle the full stack.
-          </motion.p>
+          </p>
         </div>
 
-        {/* Service list — tonal top boundary */}
+        {/* Service list */}
         <div
           style={{
             borderTop: '1px solid rgba(255,255,255,0.06)',

@@ -1,22 +1,3 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-
-function Rise({ children, delay = 0, className = '' }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
 const stats = [
   { n: '100%', label: 'Client Satisfaction' },
   { n: '48hr', label: 'Response Time' },
@@ -26,7 +7,7 @@ const stats = [
 export default function About() {
   return (
     <section id="about" className="relative py-44 px-6">
-      {/* Tonal transition — surface-low background */}
+      {/* Tonal transition */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: 'var(--surface-low)' }}
@@ -44,62 +25,52 @@ export default function About() {
 
       <div className="relative max-w-[1360px] mx-auto">
         {/* Label */}
-        <Rise>
-          <p className="text-label mb-16" style={{ color: 'var(--primary)', opacity: 0.5 }}>
-            About
-          </p>
-        </Rise>
+        <p className="text-label mb-16" style={{ color: 'var(--primary)', opacity: 0.5 }}>
+          About
+        </p>
 
         {/* Asymmetric layout */}
         <div className="grid lg:grid-cols-[1fr_auto] gap-20 lg:gap-32 items-end">
           <div>
-            <Rise delay={0.05}>
-              <h2 className="text-display-md mb-8" style={{ color: 'var(--on-surface)' }}>
-                Built for those
-                <br />
-                who demand more.
-              </h2>
-            </Rise>
+            <h2 className="text-display-md mb-8" style={{ color: 'var(--on-surface)' }}>
+              Built for those
+              <br />
+              who demand more.
+            </h2>
 
-            <Rise delay={0.15}>
-              <p
-                className="font-body text-lg leading-relaxed max-w-lg"
-                style={{ color: 'var(--on-surface-mid)' }}
-              >
-                CTRL Solutions crafts high-performance digital products for
-                brands that refuse to compromise. Precision engineering.
-                Thoughtful design. Results that last.
-              </p>
-            </Rise>
+            <p
+              className="font-body text-lg leading-relaxed max-w-lg"
+              style={{ color: 'var(--on-surface-mid)' }}
+            >
+              CTRL Solutions crafts high-performance digital products for
+              brands that refuse to compromise. Precision engineering.
+              Thoughtful design. Results that last.
+            </p>
 
-            <Rise delay={0.25}>
-              <motion.a
-                href="#contact"
-                className="btn-ghost inline-flex items-center gap-2.5 px-6 py-2.5 rounded text-label-md mt-10"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
+            <a
+              href="#contact"
+              className="btn-ghost inline-flex items-center gap-2.5 px-6 py-2.5 rounded text-label-md mt-10"
+            >
+              Work with us
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 13 13"
+                fill="none"
               >
-                Work with us
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 13 13"
-                  fill="none"
-                >
-                  <path
-                    d="M2.5 10.5L10.5 2.5M10.5 2.5H4.5M10.5 2.5v6"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </motion.a>
-            </Rise>
+                <path
+                  d="M2.5 10.5L10.5 2.5M10.5 2.5H4.5M10.5 2.5v6"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
           </div>
 
-          {/* Stats — stacked right */}
-          <Rise delay={0.2} className="flex flex-row lg:flex-col gap-10 lg:gap-8 pb-2">
+          {/* Stats */}
+          <div className="flex flex-row lg:flex-col gap-10 lg:gap-8 pb-2">
             {stats.map((s) => (
               <div key={s.n} className="flex flex-col gap-1">
                 <span
@@ -116,7 +87,7 @@ export default function About() {
                 </span>
               </div>
             ))}
-          </Rise>
+          </div>
         </div>
       </div>
     </section>
