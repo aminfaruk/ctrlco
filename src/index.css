@@ -1,15 +1,44 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════
+   DESIGN SYSTEM: "Technological Sovereignty"
+   Surface hierarchy, no-line rule, glass & gradient system
+═══════════════════════════════════════════════════════════ */
+
 @layer base {
+  :root {
+    /* Surface hierarchy — semiconductor stack */
+    --surface: #0e0e0f;
+    --surface-low: #131314;
+    --surface-container: #1a191b;
+    --surface-high: #201f21;
+    --surface-highest: #2a292b;
+
+    /* Accent system */
+    --primary: #81ecff;
+    --primary-dim: #005762;
+    --secondary: #d674ff;
+    --secondary-container: #9800d0;
+
+    /* Text */
+    --on-surface: #ffffff;
+    --on-surface-mid: rgba(255, 255, 255, 0.6);
+    --on-surface-dim: rgba(255, 255, 255, 0.35);
+
+    /* Structural */
+    --outline-variant: #484849;
+    --ghost-border: rgba(72, 72, 73, 0.2);
+  }
+
   html {
     scroll-behavior: smooth;
-    background-color: #f8f9fc;
-    color: #0d0f1a;
+    background-color: var(--surface);
+    color: var(--on-surface);
   }
 
   body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: #f8f9fc;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--surface);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -19,14 +48,14 @@
   * { box-sizing: border-box; }
 
   ::selection {
-    background: rgba(99, 102, 241, 0.18);
-    color: #0d0f1a;
+    background: rgba(129, 236, 255, 0.18);
+    color: var(--on-surface);
   }
 
   ::-webkit-scrollbar { width: 2px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    background: rgba(99, 102, 241, 0.3);
+    background: rgba(129, 236, 255, 0.25);
     border-radius: 2px;
   }
 
@@ -39,54 +68,113 @@
 }
 
 @layer utilities {
-  .text-gradient {
-    background: linear-gradient(160deg, #0d0f1a 0%, #2a2d42 55%, #4b4f72 100%);
+  /* ── Typography utilities ─────────────────────────── */
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* ── The Command Scale — Space Grotesk display ──── */
+  .text-display-lg {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    letter-spacing: -0.04em;
+    line-height: 1.0;
+    font-weight: 700;
+  }
+
+  .text-display-md {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+    font-weight: 700;
+  }
+
+  /* ── Data Scale — terminal metadata ──────────────── */
+  .text-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .text-label-md {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── Gradient utilities ──────────────────────────── */
+  .gradient-text {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .text-accent {
-    background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .gradient-cyan-purple {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
   }
 
-  /* Hairline surface for light bg */
-  .surface {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.07);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03);
+  /* ── Surface utilities — tonal transitions ─────── */
+  .surface-base {
+    background-color: var(--surface);
   }
 
-  .surface-hover {
-    transition: background 400ms cubic-bezier(0.32, 0.72, 0, 1),
-                border-color 400ms cubic-bezier(0.32, 0.72, 0, 1),
-                box-shadow 400ms cubic-bezier(0.32, 0.72, 0, 1);
+  .surface-low {
+    background-color: var(--surface-low);
   }
 
-  .surface-hover:hover {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(99, 102, 241, 0.2);
-    box-shadow: 0 4px 24px rgba(99, 102, 241, 0.08);
+  .surface-container {
+    background-color: var(--surface-container);
   }
 
+  .surface-high {
+    background-color: var(--surface-high);
+  }
+
+  /* ── Glass panel — "Frozen Tech" ───────────────── */
+  .glass-panel {
+    background: rgba(42, 41, 43, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* ── Ghost Border — structural hint ────────────── */
+  .ghost-border {
+    border: 1px solid var(--ghost-border);
+  }
+
+  /* ── Atmospheric shadow ─────────────────────────── */
+  .shadow-atmospheric {
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.04);
+  }
+
+  /* ── Button system ──────────────────────────────── */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: #0d0f1a;
-    border: 1px solid #0d0f1a;
-    color: rgba(255, 255, 255, 0.92);
+    background: var(--primary);
+    color: var(--primary-dim);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
     cursor: pointer;
+    border: none;
     transition: all 350ms cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .btn-primary:hover {
-    background: #1e2038;
-    border-color: #1e2038;
-    box-shadow: 0 8px 32px rgba(13, 15, 26, 0.2);
+    box-shadow: 0 8px 32px rgba(129, 236, 255, 0.2);
     transform: translateY(-1px);
   }
 
@@ -94,20 +182,23 @@
     transform: scale(0.98);
   }
 
+  /* ── Secondary ghost button ─────────────────────── */
   .btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     background: transparent;
-    border: 1px solid rgba(13, 15, 26, 0.15);
-    color: rgba(13, 15, 26, 0.55);
+    border: 1px solid var(--ghost-border);
+    color: var(--primary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
     cursor: pointer;
     transition: all 350ms cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .btn-ghost:hover {
-    border-color: rgba(13, 15, 26, 0.35);
-    color: rgba(13, 15, 26, 0.9);
+    background: var(--surface-high);
+    border-color: rgba(72, 72, 73, 0.4);
     transform: translateY(-1px);
   }
 
@@ -115,24 +206,70 @@
     transform: scale(0.98);
   }
 
+  /* ── Electric action button — gradient stroke ──── */
+  .btn-electric {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid transparent;
+    background-image: linear-gradient(var(--surface), var(--surface)),
+                      linear-gradient(45deg, var(--primary), var(--secondary));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: var(--primary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 350ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .btn-electric:hover {
+    box-shadow: 0 0 24px rgba(129, 236, 255, 0.12),
+                0 0 24px rgba(214, 116, 255, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .btn-electric:active {
+    transform: scale(0.98);
+  }
+
+  /* ── Button icon circle ─────────────────────────── */
   .btn-icon {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 87, 98, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 350ms cubic-bezier(0.32, 0.72, 0, 1), background 350ms;
+    transition: transform 350ms cubic-bezier(0.32, 0.72, 0, 1);
     flex-shrink: 0;
   }
 
   .btn-ghost .btn-icon {
-    background: rgba(13, 15, 26, 0.07);
+    background: rgba(129, 236, 255, 0.1);
   }
 
   .btn-primary:hover .btn-icon,
   .btn-ghost:hover .btn-icon {
     transform: translate(1px, -1px) scale(1.1);
+  }
+
+  /* ── Chip/Tag — neon-on-black ───────────────────── */
+  .chip {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(152, 0, 208, 0.2);
+    color: var(--secondary);
+  }
+
+  .chip-cyan {
+    background: rgba(129, 236, 255, 0.1);
+    color: var(--primary);
   }
 }
